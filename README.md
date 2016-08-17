@@ -57,21 +57,21 @@ This scripts were tested under 1.8.5.1L firmware
 
 Troubleshooting:
 1. Your camera starts reboot from time to time. Your RAM is likely not enough. Turn off additional features which you have installed.
-  1 Turn off ftp server:
+  1. Turn off ftp server:
   ```
   rm /etc/init.d/S89ftp
   ```
-  2 Turn off HTTP server
+  2. Turn off HTTP server
   ```
   rm /home/web/server
   rm /home/web/record
   ```
-  3 Turn off RTSP server
+  3. Turn off RTSP server
   ```
   rm /home/rtspsvr
   mv /home/recv_X.726 /home/recv.726
   ```
-  4 Reboot your camera
+  4. Reboot your camera
   ```
   reboot
   ```
@@ -85,12 +85,12 @@ if it isn't pingable then check your route table:
 ```
 route -n
 ```
-  1 If your gateway isn't correct then add your gateway (Where 192.168.0.1 is your router IP address):
+  1. If your gateway isn't correct then add your gateway (Where 192.168.0.1 is your router IP address):
   ```
   my_router_ip="192.168.0.1"
   route add default gw ${my_router_ip} ra0
   ```
-  2 Add execution of this command after reboot:
+  2. Add execution of this command after reboot:
   ```
   echo "#!/bin/sh" > /etc/init.d/S65route
   echo "change_def_route(){" >> /etc/init.d/S65route
@@ -101,12 +101,12 @@ route -n
   chmod +x vi /etc/init.d/S65route
   echo "${my_router_ip}" > /tmp/gw1
   ```
-  3 Add public DNS
+  3. Add public DNS
   ```
   echo "nameserver 8.8.8.8" > /var/run/dhcpcd/resolv.conf/resolv.conf
   echo "nameserver 8.8.8.8" > /etc/resolv.conf
   ```
-  4 Reboot your camera
+  4. Reboot your camera
   ```
   reboot
   ```
