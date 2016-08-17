@@ -56,6 +56,7 @@ The script in the loop will create the same folders as in the record folder and 
 This scripts were tested under 1.8.5.1L firmware
 
 Troubleshooting:
+
 1. Your camera starts reboot from time to time. Your RAM is likely not enough. Turn off additional features which you have installed.
   1. Turn off ftp server:
   ```
