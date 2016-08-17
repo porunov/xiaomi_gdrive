@@ -7,10 +7,10 @@ xiaomi_gdrive let you automaticly upload your videos from xiaomi smart ip camera
 1. Turn off your camera and get microSD
 2. Copy next folders into your microSD:
 
-```
-test
-gdrive
-```
+  ```
+  test
+  gdrive
+  ```
 
 3. Put microSD into your camera
 4. Turn on camera
