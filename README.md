@@ -20,13 +20,13 @@ Example: telnet 192.168.0.70
 6. Go to the browser
 7. Create your Google Drive application and OAuth keys for Google Drive API (example tutorial: http://www.iperiusbackup.net/en/how-to-enable-google-drive-api-and-get-client-credentials/)
 Example:
-  1 Go to Google Api Console (https://console.developers.google.com/?hl=RU)
-  2 Click "Drive API"
-  3 Click "Enable"
-  4 Create project
-  5 Click "Create credentials" and choose OAuth client ID
-  6 Choose application type: Other types 
-  7 Save your client id and client secret
+  1. Go to Google Api Console (https://console.developers.google.com/?hl=RU)
+  2. Click "Drive API"
+  3. Click "Enable"
+  4. Create project
+  5. Click "Create credentials" and choose OAuth client ID
+  6. Choose application type: Other types 
+  7. Save your client id and client secret
 8. Go to your console back
 9. Run GDriveConf to configure your Google Drive access:
 ```
