@@ -2,33 +2,16 @@
 Google drive uploader for xiaomi smart ip camera
 xiaomi_gdrive let you automaticly upload your videos from xiaomi smart ip camera to your google drive account. Also it can automaticly remove old files from your google drive account to prevent space exhaustion.
 
-1. This is a numbered list.
-2. I'm going to include a fenced code block as part of this bullet:
-
-    ```
-    Code
-    More Code
-    ```
-
-3. We can put fenced code blocks inside nested bullets, too.
-   1. Like this:
-
-        ```c
-        printf("Hello, World!");
-        ```
-
-   2. The key is to indent your fenced block by **(4 * bullet_indent_level)** spaces.
-   3. Also need to put a separating newline above and below the fenced block.
-
-
 ###Step-by-step instruction for installing xiaomi_gdrive
 
 1. Turn off your camera and get microSD
 2. Copy next folders into your microSD:
-`
+
+```
 test
 gdrive
-`
+```
+
 3. Put microSD into your camera
 4. Turn on camera
 5. After turnung on a camera use telnet to connect to your camera (login: root, password: 1234qwer):
