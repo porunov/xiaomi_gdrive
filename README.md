@@ -27,7 +27,6 @@ Example:
   5 Click "Create credentials" and choose OAuth client ID
   6 Choose application type: Other types 
   7 Save your client id and client secret
-
 8. Go to your console back
 9. Run GDriveConf to configure your Google Drive access:
 ```
