@@ -6,17 +6,21 @@ xiaomi_gdrive let you automaticly upload your videos from xiaomi smart ip camera
 
 1. Turn off your camera and get microSD
 2. Copy next folders into your microSD:
+
   ```
   test
   gdrive
   ```
+  
 3. Put microSD into your camera
 4. Turn on camera
 5. After turnung on a camera use telnet to connect to your camera (login: root, password: 1234qwer):
-```
-telnet {YOUR_CAMERA_IP_ADDRESS}
-Example: telnet 192.168.0.70
-```
+
+  ```
+  telnet {YOUR_CAMERA_IP_ADDRESS}
+  Example: telnet 192.168.0.70
+  ```
+
 6. Go to the browser
 7. Create your Google Drive application and OAuth keys for Google Drive API (example tutorial: http://www.iperiusbackup.net/en/how-to-enable-google-drive-api-and-get-client-credentials/)
 Example:
@@ -29,9 +33,11 @@ Example:
   7. Save your client id and client secret
 8. Go to your console back
 9. Run GDriveConf to configure your Google Drive access:
-```
-sh /home/hd1/gdrive/GDriveConf
-```
+
+  ```
+  sh /home/hd1/gdrive/GDriveConf
+  ```
+
 10. Paste your client id and press enter
 11. Paste your client secret and press enter
 12. Copy link which you see and paste into your browser
@@ -45,9 +51,11 @@ sh /home/hd1/gdrive/GDriveConf
 19. Type the number of a folder and press Enter. (If you want to save videos in the root dir then just press Enter)
 20. You will be asked if you want to turn on automatic remove. Press `1` and type Enter if you want. Press `0` and type Enter if you do not want. GDriveAutoremover itself will delete old files in case if your disk space overflows.
 21. Reboot your camera:
-```
-reboot
-```
+
+  ```
+  reboot
+  ```
+
 22. Done
 
 How it works:
@@ -59,55 +67,72 @@ Troubleshooting:
 
 1. Your camera starts reboot from time to time. Your RAM is likely not enough. Turn off additional features which you have installed.
   1. Turn off ftp server:
-  ```
-  rm /etc/init.d/S89ftp
-  ```
+  
+    ```
+    rm /etc/init.d/S89ftp
+    ```
+  
   2. Turn off HTTP server
-  ```
-  rm /home/web/server
-  rm /home/web/record
-  ```
+    ```
+    rm /home/web/server
+    rm /home/web/record
+    ```
+  
   3. Turn off RTSP server
-  ```
-  rm /home/rtspsvr
-  mv /home/recv_X.726 /home/recv.726
-  ```
+  
+    ```
+    rm /home/rtspsvr
+    mv /home/recv_X.726 /home/recv.726
+    ```
+  
   4. Reboot your camera
-  ```
-  reboot
-  ```
+  
+    ```
+    reboot
+    ```
 
 2. Check if camera can send requests to the Internet.
-```
-ping -q -c2 8.8.8.8
-ping -q -c2 google.com
-```
+  
+  ```
+  ping -q -c2 8.8.8.8
+  ping -q -c2 google.com
+  ```
+
 if it isn't pingable then check your route table:
-```
-route -n
-```
+
+  ```
+  route -n
+  ```
+  
   1. If your gateway isn't correct then add your gateway (Where 192.168.0.1 is your router IP address):
-  ```
-  my_router_ip="192.168.0.1"
-  route add default gw ${my_router_ip} ra0
-  ```
+  
+    ```
+    my_router_ip="192.168.0.1"
+    route add default gw ${my_router_ip} ra0
+    ```
+  
   2. Add execution of this command after reboot:
-  ```
-  echo "#!/bin/sh" > /etc/init.d/S65route
-  echo "change_def_route(){" >> /etc/init.d/S65route
-  echo "route add default gw ${my_router_ip} ra0" >> /etc/init.d/S65route
-  echo "}" >> /etc/init.d/S65route
-  echo "change_def_route &" >> /etc/init.d/S65route
-  echo "exit 0" >> /etc/init.d/S65route
-  chmod +x vi /etc/init.d/S65route
-  echo "${my_router_ip}" > /tmp/gw1
-  ```
+  
+    ```
+    echo "#!/bin/sh" > /etc/init.d/S65route
+    echo "change_def_route(){" >> /etc/init.d/S65route
+    echo "route add default gw ${my_router_ip} ra0" >> /etc/init.d/S65route
+    echo "}" >> /etc/init.d/S65route
+    echo "change_def_route &" >> /etc/init.d/S65route
+    echo "exit 0" >> /etc/init.d/S65route
+    chmod +x vi /etc/init.d/S65route
+    echo "${my_router_ip}" > /tmp/gw1
+    ```
+  
   3. Add public DNS
-  ```
-  echo "nameserver 8.8.8.8" > /var/run/dhcpcd/resolv.conf/resolv.conf
-  echo "nameserver 8.8.8.8" > /etc/resolv.conf
-  ```
+    
+    ```
+    echo "nameserver 8.8.8.8" > /var/run/dhcpcd/resolv.conf/resolv.conf
+    echo "nameserver 8.8.8.8" > /etc/resolv.conf
+    ```
+  
   4. Reboot your camera
-  ```
-  reboot
-  ```
+  
+    ```
+    reboot
+    ```
