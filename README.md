@@ -98,7 +98,7 @@ Troubleshooting:
   ping -q -c2 google.com
   ```
 
-if it isn't pingable then check your route table:
+  if it isn't pingable then check your route table:
 
   ```
   route -n
