@@ -1,5 +1,7 @@
-# xiaomi_gdrive
+# Google drive uploader for xiaomi smart ip camera 
 Google drive uploader for xiaomi smart ip camera. xiaomi_gdrive let you automatically upload your videos from xiaomi smart ip camera to your google drive account. Also it can automatically remove old files from your google drive account to prevent space exhaustion.
+
+![ants_smart_webcam_ xiaomi](https://cloud.githubusercontent.com/assets/17673243/17768152/76d2a56a-653b-11e6-81db-522a29f9f1f2.png)
 
 ###Step-by-step instruction for installing xiaomi_gdrive
 
