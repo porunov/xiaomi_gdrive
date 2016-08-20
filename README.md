@@ -25,7 +25,7 @@ Google drive uploader for xiaomi smart ip camera. xiaomi_gdrive let you automati
 6. Go to the browser
 7. Create your Google Drive application and OAuth keys for Google Drive API (example tutorial: http://www.iperiusbackup.net/en/how-to-enable-google-drive-api-and-get-client-credentials/)
 Example:
-  1. Go to Google Api Console (https://console.developers.google.com/?hl=RU)
+  1. Go to Google Api Console (https://console.developers.google.com)
   2. Click "Drive API"
   3. Click "Enable"
   4. Create project
