@@ -40,6 +40,7 @@ Google drive uploader for xiaomi smart ip camera. xiaomi_gdrive let you automati
     6. Click "Done"
   6. Click on your credentials
   7. Save your client id and client secret
+
 8. Go to your console back
 9. Run GDriveConf to configure your Google Drive access:
 
