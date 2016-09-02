@@ -122,7 +122,7 @@ Troubleshooting:
     route add default gw ${my_router_ip} ra0
     ```
   
-  2. Add execution of this command after reboot:
+  2. To have normal gateway after reboot run all next commands:
   
     ```
     echo "#!/bin/sh" > /etc/init.d/S65route
