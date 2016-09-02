@@ -6,24 +6,25 @@ Google drive loader for xiaomi smart ip camera. xiaomi_gdrive let you automatica
 ###Step-by-step instruction for installing xiaomi_gdrive
 
 1. Turn off your camera and get microSD
-2. Copy next folders into your microSD:
+2. Download xiaomi_gdrive and unzip it (https://github.com/porunov/xiaomi_gdrive/releases/download/0.0.3/xiaomi_gdrive.zip)
+3. Copy next folders into your microSD:
 
   ```
   test
   gdrive
   ```
   
-3. Put microSD into your camera
-4. Turn on camera
-5. After turnung on a camera use telnet to connect to your camera (login: root, password: 1234qwer):
+4. Put microSD into your camera
+5. Turn on camera
+6. After turnung on a camera use telnet to connect to your camera (login: root, password: 1234qwer):
 
   ```
   telnet {YOUR_CAMERA_IP_ADDRESS}
   Example: telnet 192.168.0.70
   ```
 
-6. Go to the browser
-7. Create your Google Drive application and OAuth keys for Google Drive API (example tutorial: http://www.iperiusbackup.net/en/how-to-enable-google-drive-api-and-get-client-credentials/)
+7. Go to the browser
+8. Create your Google Drive application and OAuth keys for Google Drive API (example tutorial: http://www.iperiusbackup.net/en/how-to-enable-google-drive-api-and-get-client-credentials/)
   
   Example:
   
@@ -41,32 +42,32 @@ Google drive loader for xiaomi smart ip camera. xiaomi_gdrive let you automatica
   6. Click on your credentials
   7. Save your client id and client secret
 
-8. Go to your console back
-9. Run GDriveConf to configure your Google Drive access:
+9. Go to your console back
+10. Run GDriveConf to configure your Google Drive access:
 
   ```
   sh /home/hd1/gdrive/GDriveConf
   ```
 
-10. Paste your client id and press enter
-11. Paste your client secret and press enter
-12. Copy link which you see and paste into your browser
-13. Click "Accept"
-14. Copy code which you see
-15. Go to your console back
-16. Paste your code and press enter
-17. You will be suggested to see the folders. Press Enter if you want to see all folders. If you want to see only root folders type `root` and press Enter.
+11. Paste your client id and press enter
+12. Paste your client secret and press enter
+13. Copy link which you see and paste into your browser
+14. Click "Accept"
+15. Copy code which you see
+16. Go to your console back
+17. Paste your code and press enter
+18. You will be suggested to see the folders. Press Enter if you want to see all folders. If you want to see only root folders type `root` and press Enter.
 //Folders showing isn't fast. Wait for 5-10 seconds to see your directories.
-18. You will see your folders (number of folder is on the left side)
-19. Type the number of a folder and press Enter. (If you want to save videos in the root dir then just press Enter)
-20. You will be asked if you want to turn on automatic remove. Press `1` and type Enter if you want. Press `0` and type Enter if you do not want. GDriveAutoremover itself will delete old files in case if your disk space overflows.
-21. Reboot your camera:
+19. You will see your folders (number of folder is on the left side)
+20. Type the number of a folder and press Enter. (If you want to save videos in the root dir then just press Enter)
+21. You will be asked if you want to turn on automatic remove. Press `1` and type Enter if you want. Press `0` and type Enter if you do not want. GDriveAutoremover itself will delete old files in case if your disk space overflows.
+22. Reboot your camera:
 
   ```
   reboot
   ```
 
-22. Done
+23. Done
 
 How it works:
 The script in the loop will create the same folders as in the record folder and upload videos into Google Drive. After the reboot, or failure of the Internet script continues normally send files. If you have enabled automatic remove, GDriveAutoremover will check your free space every 45 minutes. In case when disk space is not enough, the script will erase old videos (IMPORTANT: do not put anything extra in the folder which is designed for video because GDriveAutoremover can remove it if it considers that the disk space is not enough).
