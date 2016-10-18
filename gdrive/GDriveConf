@@ -1,5 +1,5 @@
 #!/bin/sh
-# GDriveConf version 0.3 by Alexandr Porunov https://github.com/porunov/xiaomi_gdrive
+# GDriveConf version 0.5 by Alexandr Porunov https://github.com/porunov/xiaomi_gdrive
 # Google drive configuration script
 
 gdrive_dir="/home/hd1/gdrive/"

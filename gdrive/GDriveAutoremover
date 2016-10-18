@@ -1,15 +1,36 @@
 #!/bin/sh
-# GDriveAutoremover version 0.3 by Alexandr Porunov https://github.com/porunov/xiaomi_gdrive
+# GDriveAutoremover version 0.5 by Alexandr Porunov https://github.com/porunov/xiaomi_gdrive
 # Google drive autoremover
 
 gdrive_dir="/home/hd1/gdrive/"
 total_space=0
 used_space=0
+sleep_time=0
 log=${gdrive_dir}log/GDriveAutoremover.log
 #min_free_space - 600 MB * 1048576 = 629145600 byte
 min_free_space=629145600
 #prefer_free_space - 1200 MB * 1048576 = 1258291200 byte
 prefer_free_space=1258291200
+# hours: 00 minutes: 00 seconds: 00
+start_time="00:00:00"
+# hours: 23 minutes: 59 seconds: 59
+finish_time="23:59:59"
+
+wait_until_proper_hours(){
+  while [ 1 ] ;  do
+    current_time=`date +"%H:%M:%S" | awk -F':' '{print $1 * 60 * 60 + $2 * 60 + $3}'`
+    if [ ${current_time} -le ${finish_time} ] && [ ${current_time} -ge ${start_time} ]; then
+      break
+    else
+      if [ ${current_time} -le ${start_time} ]; then
+	sleep_time=`expr ${start_time} - ${current_time}`
+      else
+	sleep_time=`expr 86400 - ${current_time} + ${start_time}`
+      fi
+    fi
+    sleep ${sleep_time}
+  done
+}
 
 check_log_file(){
 	if [ $(stat -c %s ${log}) -gt 524288 ]; then
@@ -21,6 +42,7 @@ check_log_file(){
 
 renew_token(){
 	while [ 1 ] ;  do
+		wait_until_proper_hours
 		${gdrive_dir}./curl --insecure -s --max-time 100 -H "Host: www.googleapis.com" -H "Content-Type: application/x-www-form-urlencoded" --request POST -o ${gdrive_dir}conf/refreshed_token --data "client_id=${client_id}&client_secret=${client_secret}&refresh_token=${refresh_token}&grant_type=refresh_token" 'https://www.googleapis.com/oauth2/v4/token' > /dev/null
 		if [ -f "${gdrive_dir}conf/refreshed_token" ]; then
 			if grep -q "access_token" ${gdrive_dir}conf/refreshed_token; then
@@ -122,6 +144,7 @@ read_conf_files(){
 get_space_info(){
 	check_token
 	while [ 1 ] ;  do
+	        wait_until_proper_hours
 		${gdrive_dir}./curl --insecure -s --max-time 100 -H "Host: www.googleapis.com" -H "Authorization: Bearer ${access_token}" --request GET  -o ${gdrive_dir}tmp/spaceInfo "https://www.googleapis.com/drive/v2/about?fields=quotaBytesTotal,quotaBytesUsed" > /dev/null
 		if [ -f "${gdrive_dir}tmp/spaceInfo" ]; then
 			total_space=$(cat "${gdrive_dir}tmp/spaceInfo" | ${gdrive_dir}./JSON.sh -b | egrep '\["quotaBytesTotal"\]' | sed 's/\[.*\][^\"0-9tf]*//g' | sed 's/\"//g')
@@ -150,6 +173,7 @@ get_space_info(){
 get_folder_list(){
 	check_token
 	while [ 1 ] ;  do
+	        wait_until_proper_hours
 		${gdrive_dir}./curl --insecure -s --max-time 100 -H "Host: www.googleapis.com" -H "Authorization: Bearer ${access_token}" --request GET  -o ${gdrive_dir}tmp/folderListToRemove "https://www.googleapis.com/drive/v2/files?q='${folder_id}'%20in%20parents%20and%20mimeType='application/vnd.google-apps.folder'%20and%20trashed=false&orderBy=createdDate&maxResults=${1}&fields=items(id,title)" > /dev/null
 		if [ -f "${gdrive_dir}tmp/folderListToRemove" ]; then
 			if ! grep -q "items" ${gdrive_dir}tmp/folderListToRemove; then
@@ -178,6 +202,7 @@ get_folder_list(){
 remove_folder(){
 	check_token
 	while [ 1 ] ;  do
+	        wait_until_proper_hours
 		${gdrive_dir}./curl --insecure -s --max-time 100 -H "Host: www.googleapis.com" -H "Authorization: Bearer ${access_token}" --request DELETE  -o ${gdrive_dir}tmp/removedFolder "https://www.googleapis.com/drive/v2/files/${1}" > /dev/null
 		if [ -f "${gdrive_dir}tmp/removedFolder" ]; then
 			response_code=$(cat "${gdrive_dir}tmp/folderListToRemove" | ${gdrive_dir}./JSON.sh -b | egrep '\["error","code"\]' | sed 's/\[.*\][^\"0-9tf]*//g' | sed 's/\"//g')
@@ -203,7 +228,7 @@ start_autoremover(){
 		if [ ${used_space} -gt ${let_space} ]; then
 			let_space=`expr ${total_space} - ${prefer_free_space}`
 			while [ ${used_space} -gt ${let_space} ]; do
-				folders_count=$(echo ${used_space} ${total_space} | awk '{ printf "%.0f", ($1 - ($2 * 0.008)) / 251658240 + 1}')
+				folders_count=$(echo ${used_space} ${let_space} | awk '{ printf "%.0f", ($1 - $2) / 251658240 + 1}')
 				get_folder_list ${folders_count}
 				i=0
 				while read folder_title_to_remove; do
@@ -220,9 +245,12 @@ start_autoremover(){
 				sleep 25
 			done
 		fi
-		sleep 2700
+		sleep 1200
 	done
 }
+
+start_time=`echo ${start_time} | awk -F':' '{print $1 * 60 * 60 + $2 * 60 + $3}'`
+finish_time=`echo ${finish_time} | awk -F':' '{print $1 * 60 * 60 + $2 * 60 + $3}'`
 
 read_conf_files >> ${log}
 start_autoremover >> ${log} 2>&1 &

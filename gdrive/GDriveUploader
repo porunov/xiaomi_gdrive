@@ -1,14 +1,35 @@
 #!/bin/sh
-# GDriveUploader version 0.3 by Alexandr Porunov https://github.com/porunov/xiaomi_gdrive
+# GDriveUploader version 0.5 by Alexandr Porunov https://github.com/porunov/xiaomi_gdrive
 # Google drive uploader
 
 gdrive_dir="/home/hd1/gdrive/"
 record_dir="/home/hd1/record/"
 next_dir=""
 next_time=0
+sleep_time=0
 current_file=""
 log=${gdrive_dir}log/GDriveUploader.log
 max_connect_tries=3
+# hours: 00 minutes: 00 seconds: 00
+start_time="00:00:00"
+# hours: 23 minutes: 59 seconds: 59
+finish_time="23:59:59"
+
+wait_until_proper_hours(){
+  while [ 1 ] ;  do
+    current_time=`date +"%H:%M:%S" | awk -F':' '{print $1 * 60 * 60 + $2 * 60 + $3}'`
+    if [ ${current_time} -le ${finish_time} ] && [ ${current_time} -ge ${start_time} ]; then
+      break
+    else
+      if [ ${current_time} -le ${start_time} ]; then
+	sleep_time=`expr ${start_time} - ${current_time}`
+      else
+	sleep_time=`expr 86400 - ${current_time} + ${start_time}`
+      fi
+    fi
+    sleep ${sleep_time}
+  done
+}
 
 check_log_file(){
 	if [ $(stat -c %s ${log}) -gt 524288 ]; then
@@ -20,6 +41,7 @@ check_log_file(){
 
 renew_token(){
 	while [ 1 ] ;  do
+		wait_until_proper_hours
 		${gdrive_dir}./curl --insecure -s --max-time 100 -H "Host: www.googleapis.com" -H "Content-Type: application/x-www-form-urlencoded" --request POST -o ${gdrive_dir}conf/refreshed_token --data "client_id=${client_id}&client_secret=${client_secret}&refresh_token=${refresh_token}&grant_type=refresh_token" 'https://www.googleapis.com/oauth2/v4/token' > /dev/null
 		if [ -f "${gdrive_dir}conf/refreshed_token" ]; then
 			if grep -q "access_token" ${gdrive_dir}conf/refreshed_token; then
@@ -116,6 +138,7 @@ get_oldest_file(){
 create_dir(){
 	check_token
 	while [ 1 ] ;  do
+		wait_until_proper_hours
 		${gdrive_dir}./curl --insecure -s --max-time 100 -H "Host: www.googleapis.com" -H "Authorization: Bearer ${access_token}" -H "Content-Type: application/json" --data "{'title': '${1}', 'parents': [{'id': '${folder_id}'}], 'mimeType': 'application/vnd.google-apps.folder'}" --request POST -o ${gdrive_dir}tmp/lastDirInfo 'https://www.googleapis.com/drive/v2/files?fields=id' > /dev/null
 		if [ -f "${gdrive_dir}tmp/lastDirInfo" ]; then
 			google_dir_id=$(cat "${gdrive_dir}tmp/lastDirInfo" | ${gdrive_dir}./JSON.sh -b | egrep '\["id"\]' | sed 's/\[.*\][^\"]*//g' | sed 's/\"//g')
@@ -237,6 +260,7 @@ sendFile(){
 	check_token
 	tries=0
 	while [ 1 ] ;  do
+	        wait_until_proper_hours
 		${gdrive_dir}./curl --insecure -s --max-time 1200 -H "Host: www.googleapis.com" -H "Authorization: Bearer ${access_token}" -H "Content-Length: $(stat -c %s ${record_dir}${current_dir}/${1})" -H "Content-Type: video/mp4" --request PUT -T ${record_dir}${current_dir}/${1} -o ${gdrive_dir}tmp/lastFileInfo "https://www.googleapis.com/upload/drive/v3/files?uploadType=resumable&upload_id=${2}"
 		if [ -f "${gdrive_dir}tmp/lastFileInfo" ]; then
 			file_id=$(cat "${gdrive_dir}tmp/lastFileInfo" | ${gdrive_dir}./JSON.sh -b | egrep '\["id"\]' | sed 's/\[.*\][^\"]*//g' | sed 's/\"//g')
@@ -279,6 +303,7 @@ sendMatadata(){
 	check_token
 	jsonData="{'name': '${1}', parents: ['${google_dir_id}']}"
 	while [ 1 ] ;  do
+	        wait_until_proper_hours
 		${gdrive_dir}./curl --insecure -s --max-time 100 -H "Host: www.googleapis.com" -H "Authorization: Bearer ${access_token}" -H "Content-Length: $(expr length "${jsonData}")" -H "Content-Type: application/json; charset=UTF-8" -H "X-Upload-Content-Type: video/mp4" -H "X-Upload-Content-Length: $(stat -c %s ${record_dir}${current_dir}/${1})" --request POST  --data "${jsonData}" -D ${gdrive_dir}tmp/lastFileMetadataInfo "https://www.googleapis.com/upload/drive/v3/files?uploadType=resumable" > /dev/null
 		if [ -f "${gdrive_dir}tmp/lastFileMetadataInfo" ]; then
 			if grep -q "200 OK" ${gdrive_dir}tmp/lastFileMetadataInfo && ( grep -q "Location" ${gdrive_dir}tmp/lastFileMetadataInfo || grep -q "X-GUploader-UploadID" ${gdrive_dir}tmp/lastFileMetadataInfo; ); then 
@@ -374,6 +399,9 @@ uploadFiles(){
 		sleep 30
 	done
 }
+
+start_time=`echo ${start_time} | awk -F':' '{print $1 * 60 * 60 + $2 * 60 + $3}'`
+finish_time=`echo ${finish_time} | awk -F':' '{print $1 * 60 * 60 + $2 * 60 + $3}'`
 
 read_conf_files >> ${log}
 uploadFiles >> ${log} 2>&1 &
