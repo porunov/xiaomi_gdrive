@@ -14,33 +14,24 @@ Google drive loader for xiaomi smart ip camera. xiaomi_gdrive let you automatica
   gdrive
   ```
   
-4. If you want to set the time when your GDrive can interact with the Internet (i.e. send or remove files to Google Drive) you can change change the time in GDriveAutoremover and GDriveUploader files. If you want to let the camera interact with the Internet 24 hour/day (immediately send a video after it is recorded) then skip this step. If you still want to change the time then open your GDriveUploader script and change start_time and finish_time variables to whatever you want in the next format: HH:MM:SS. To do it find the next line:
-
+4. If you want to set the time when your GDrive can interact with the Internet (i.e. send or remove files to Google Drive) you can change change the time in GDriveAutoremover and GDriveUploader files. If you want to let the camera interact with the Internet 24 hour/day (immediately send a video after it is recorded) then skip this step. If you still want to change the time then open your GDriveUploader script and change start_time and finish_time variables to whatever you want in the next format: HH:MM:SS. To do it find the next line:    
 ```
-start_time="00:00:00"
+  start_time="00:00:00"
 ```
-
-and change the time in this line to whatever you want. Example 7:35:00 pm will be: 
-
+   and change the time in this line to whatever you want. Example 7:35:00 pm will be:    
 ```
-start_time="19:35:00"
+  start_time="19:35:00"
 ```
-
-Then find the next line:
-
+   Then find the next line:   
 ```
-finish_time="23:59:59"
+  finish_time="23:59:59"
 ```
-
-and change it to whatever you want. Example 01:00:05 am will be:
-
+   and change it to whatever you want. Example 01:00:05 am will be:   
 ```
-finish_time="01:00:05"
+  finish_time="01:00:05"
 ```
-
-Your camera will be able to interact with the Internet from start_time to finish_time.
-
-
+   Your camera will be able to interact with the Internet from start_time to finish_time.     
+   
 5. Put microSD into your camera
 6. Turn on camera
 7. After turnung on a camera use telnet to connect to your camera (login: root, password: 1234qwer):
@@ -83,7 +74,7 @@ Your camera will be able to interact with the Internet from start_time to finish
 16. Copy code which you see
 17. Go to your console back
 18. Paste your code and press enter
-19. You will be suggested to see the folders. Press Enter if you want to see all folders. If you want to see only root folders type `root` and press Enter.
+19. You will be suggested to see the folders. Press Enter if you want to see all folders. If you want to see only root folders type `root` and press Enter.   
 //Folders showing isn't fast. Wait for 5-10 seconds to see your directories.
 20. You will see your folders (number of folder is on the left side)
 21. Type the number of a folder and press Enter. (If you want to save videos in the root dir then just press Enter)
