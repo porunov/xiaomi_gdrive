@@ -39,6 +39,7 @@ finish_time="01:00:05"
 ```
 
 Your camera will be able to interact with the Internet from start_time to finish_time.
+
 5. Put microSD into your camera
 6. Turn on camera
 7. After turnung on a camera use telnet to connect to your camera (login: root, password: 1234qwer):
