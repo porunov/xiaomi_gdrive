@@ -174,4 +174,20 @@ Troubleshooting:
     reboot
     ```
 
-[![Donate](https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=HTPAA8RYN7APE&lc=UA&item_name=Developing%20open%20source%20projects&item_number=porunov_xiaomi_gdrive&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted)
+[![Donate](https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=HTPAA8RYN7APE&lc=UA&item_name=Developing%20open%20source%20projects&item_number=porunov_acme_client&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted)
+<details>
+<summary><span>
+<img src="https://cloud.githubusercontent.com/assets/17673243/25156694/dd20c7d8-24a4-11e7-8c16-d717911c443e.png" alt="Donate BTC" />
+</span></summary>
+  <p>
+Bitcoin address: 15PrkYhv9EZLiQbjQMJDRZsqdheE574XPe<br>
+<img src="https://cloud.githubusercontent.com/assets/17673243/25156691/dd175f72-24a4-11e7-8caa-45cd7a15e600.png" alt="15PrkYhv9EZLiQbjQMJDRZsqdheE574XPe" />
+</p></details>
+<details>
+<summary><span>
+<img src="https://cloud.githubusercontent.com/assets/17673243/25156693/dd1c8484-24a4-11e7-919e-6f53dfe48478.png" alt="Donate ETH" />
+</span></summary>
+  <p>
+Ethereum address: 0x65a92111d599aa0f6695b011c1c01390d4f29a2a<br>
+<img src="https://cloud.githubusercontent.com/assets/17673243/25156695/dd209754-24a4-11e7-9e60-650cc4b1b8cb.png" alt="0x65a92111d599aa0f6695b011c1c01390d4f29a2a" />
+</p></details>
