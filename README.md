@@ -3,7 +3,7 @@ Google drive loader for xiaomi smart ip camera. xiaomi_gdrive let you automatica
 
 ![ants_smart_webcam_ xiaomi](https://cloud.githubusercontent.com/assets/17673243/17768152/76d2a56a-653b-11e6-81db-522a29f9f1f2.png)
 
-###Step-by-step instruction for installing xiaomi_gdrive
+### Step-by-step instruction for installing xiaomi_gdrive
 
 1. Turn off your camera and get microSD
 2. Download xiaomi_gdrive and unzip it (https://github.com/porunov/xiaomi_gdrive/releases/download/0.0.5/xiaomi_gdrive.zip)
@@ -52,22 +52,21 @@ Google drive loader for xiaomi smart ip camera. xiaomi_gdrive let you automatica
 8. Go to the browser
 9. Create your Google Drive application and OAuth keys for Google Drive API (example tutorial: http://www.iperiusbackup.net/en/how-to-enable-google-drive-api-and-get-client-credentials/)
   
-  Example:
-  
-  1. Go to Google Api Console (https://console.developers.google.com/?hl=RU)
-  2. Click "Drive API"
-  3. Clieck "Create project" and create it (if don't have one)
-  4. Click "Enable"
-  5. Go to Credentials and add credentials to your project
-    1. Where will you be calling the API from? : Other UI (e.g. Windows, CLI tool)
-    2. What data will you be accessing? : User data
-    3. Click "What credentials do I need?"
-    4. Name your credentials as you want
-    5. Product name shown to users - use any name
-    6. Click "Done"
-  6. Click on your credentials
-  7. Save your client id and client secret
-
+   Example:
+   1. Go to Google Api Console (https://console.developers.google.com/?hl=RU)
+   2. Click "Drive API"
+   3. Clieck "Create project" and create it (if don't have one)
+   4. Click "Enable"
+   5. Go to Credentials and add credentials to your project
+      1. Where will you be calling the API from? : Other UI (e.g. Windows, CLI tool)
+      2. What data will you be accessing? : User data
+      3. Click "What credentials do I need?"
+      4. Name your credentials as you want
+      5. Product name shown to users - use any name
+      6. Click "Done"
+   6. Click on your credentials
+   7. Save your client id and client secret
+   
 10. Go to your console back
 11. Run GDriveConf to configure your Google Drive access:
 
@@ -103,76 +102,76 @@ This scripts were tested under 1.8.5.1L firmware
 Troubleshooting:
 
 1. Your camera starts reboot from time to time. Your RAM is likely not enough. Turn off additional features which you have installed.
-  1. Turn off ftp server:
+   1. Turn off ftp server:
+   
+      ```
+      rm /etc/init.d/S89ftp
+      ```
   
-    ```
-    rm /etc/init.d/S89ftp
-    ```
+   2. Turn off HTTP server
+      ```
+      rm /home/web/server
+      rm /home/web/record
+      ```
+      
+   3. Turn off RTSP server
   
-  2. Turn off HTTP server
-    ```
-    rm /home/web/server
-    rm /home/web/record
-    ```
+      ```
+      rm /home/rtspsvr
+      mv /home/recv_X.726 /home/recv.726
+      ```
   
-  3. Turn off RTSP server
-  
-    ```
-    rm /home/rtspsvr
-    mv /home/recv_X.726 /home/recv.726
-    ```
-  
-  4. Reboot your camera
-  
-    ```
-    reboot
-    ```
+   4. Reboot your camera
+   
+      ```
+      reboot
+      ```
 
 2. Check if camera can send requests to the Internet.
   
-  ```
-  ping -q -c2 8.8.8.8
-  ping -q -c2 google.com
-  ```
-
-  if it isn't pingable then check your route table:
-
-  ```
-  route -n
-  ```
+   ```
+   ping -q -c2 8.8.8.8
+   ping -q -c2 google.com
+   ```
+   
+   if it isn't pingable then check your route table:
+   
+   ```
+   route -n
+   ```
   
-  1. If your gateway isn't correct then add your gateway (Where 192.168.0.1 is your router IP address):
-  
-    ```
-    my_router_ip="192.168.0.1"
-    route add default gw ${my_router_ip} ra0
-    ```
-  
-  2. To have normal gateway after reboot run all next commands:
-  
-    ```
-    echo "#!/bin/sh" > /etc/init.d/S65route
-    echo "change_def_route(){" >> /etc/init.d/S65route
-    echo "route add default gw ${my_router_ip} ra0" >> /etc/init.d/S65route
-    echo "}" >> /etc/init.d/S65route
-    echo "change_def_route &" >> /etc/init.d/S65route
-    echo "exit 0" >> /etc/init.d/S65route
-    chmod +x vi /etc/init.d/S65route
-    echo "${my_router_ip}" > /tmp/gw1
-    ```
-  
-  3. Add public DNS
+   1. If your gateway isn't correct then add your gateway (Where 192.168.0.1 is your router IP address):
+      
+      ```
+      my_router_ip="192.168.0.1"
+      route add default gw ${my_router_ip} ra0
+      ```
+      
+   2. To have normal gateway after reboot run all next commands:
     
-    ```
-    echo "nameserver 8.8.8.8" > /var/run/dhcpcd/resolv.conf/resolv.conf
-    echo "nameserver 8.8.8.8" > /etc/resolv.conf
-    ```
+      ```
+      echo "#!/bin/sh" > /etc/init.d/S65route
+      echo "change_def_route(){" >> /etc/init.d/S65route
+      echo "route add default gw ${my_router_ip} ra0" >> /etc/init.d/S65route
+      echo "}" >> /etc/init.d/S65route
+      echo "change_def_route &" >> /etc/init.d/S65route
+      echo "exit 0" >> /etc/init.d/S65route
+      chmod +x vi /etc/init.d/S65route
+      echo "${my_router_ip}" > /tmp/gw1
+      ```
   
-  4. Reboot your camera
+   3. Add public DNS
+      
+      ```
+      echo "nameserver 8.8.8.8" > /var/run/dhcpcd/resolv.conf/resolv.conf
+      echo "nameserver 8.8.8.8" > /etc/resolv.conf
+      ```
   
-    ```
-    reboot
-    ```
+   4. Reboot your camera
+  
+      ```
+      reboot
+      ```
 
 ----
 
