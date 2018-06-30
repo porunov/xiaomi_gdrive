@@ -1,3 +1,10 @@
-You can help me by donating any amount of money
+You can help me by donating any amount of money:
 
-[![Donate](https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=HTPAA8RYN7APE&lc=UA&item_name=Developing%20open%20source%20projects&item_number=porunov_xiaomi_gdrive&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted)
+Patreon: https://www.patreon.com/porunov
+
+Bountysource: https://salt.bountysource.com/checkout/amount?team=porunov
+
+Bitcoin address: 15PrkYhv9EZLiQbjQMJDRZsqdheE574XPe
+
+Ethereum address: 0x65a92111d599aa0f6695b011c1c01390d4f29a2a
+

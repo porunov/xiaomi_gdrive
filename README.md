@@ -1,5 +1,5 @@
 # Google drive loader for xiaomi smart ip camera 
-Google drive loader for xiaomi smart ip camera. xiaomi_gdrive let you automatically upload your videos from xiaomi smart ip camera to your google drive account. Also it can automatically remove old files from your google drive account to prevent space exhaustion.
+Google drive loader for xiaomi smart ip camera (12CN). xiaomi_gdrive let you automatically upload your videos from xiaomi smart ip camera to your google drive account. Also it can automatically remove old files from your google drive account to prevent space exhaustion.
 
 ![ants_smart_webcam_ xiaomi](https://cloud.githubusercontent.com/assets/17673243/17768152/76d2a56a-653b-11e6-81db-522a29f9f1f2.png)
 
@@ -177,20 +177,7 @@ Troubleshooting:
 
 ## Donate to the xiaomi_gdrive project :hearts:
 
-<span><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=HTPAA8RYN7APE&lc=UA&item_name=Developing%20open%20source%20projects&item_number=porunov_xiaomi_gdrive&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted" title="Donate"><img src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" alt="Donate" /></a></span>
-<details>
-<summary><span>
-<img src="https://cloud.githubusercontent.com/assets/17673243/25156694/dd20c7d8-24a4-11e7-8c16-d717911c443e.png" alt="Donate BTC" />
-</span></summary>
-  <p>
+<span class="badge-patreon"><a href="https://www.patreon.com/porunov" title="Donate to this project using Patreon"><img src="https://img.shields.io/badge/patreon-donate-blue.svg" alt="Patreon donate button" /></a></span>
+<span class="badge-bountysource"><a href="https://salt.bountysource.com/checkout/amount?team=porunov" title="Donate to this project using Bountysource"><img src="https://img.shields.io/badge/bountysource-donate-blue.svg" alt="Patreon donate button" /></a></span><br>
 Bitcoin address: 15PrkYhv9EZLiQbjQMJDRZsqdheE574XPe<br>
-<img src="https://cloud.githubusercontent.com/assets/17673243/25156691/dd175f72-24a4-11e7-8caa-45cd7a15e600.png" alt="15PrkYhv9EZLiQbjQMJDRZsqdheE574XPe" />
-</p></details>
-<details>
-<summary><span>
-<img src="https://cloud.githubusercontent.com/assets/17673243/25156693/dd1c8484-24a4-11e7-919e-6f53dfe48478.png" alt="Donate ETH" />
-</span></summary>
-  <p>
 Ethereum address: 0x65a92111d599aa0f6695b011c1c01390d4f29a2a<br>
-<img src="https://cloud.githubusercontent.com/assets/17673243/25156695/dd209754-24a4-11e7-9e60-650cc4b1b8cb.png" alt="0x65a92111d599aa0f6695b011c1c01390d4f29a2a" />
-</p></details>
