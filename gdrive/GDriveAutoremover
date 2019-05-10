@@ -145,10 +145,10 @@ get_space_info(){
 	check_token
 	while [ 1 ] ;  do
 	        wait_until_proper_hours
-		${gdrive_dir}./curl --insecure -s --max-time 100 -H "Host: www.googleapis.com" -H "Authorization: Bearer ${access_token}" --request GET  -o ${gdrive_dir}tmp/spaceInfo "https://www.googleapis.com/drive/v2/about?fields=quotaBytesTotal,quotaBytesUsed" > /dev/null
+		${gdrive_dir}./curl --insecure -s --max-time 100 -H "Host: www.googleapis.com" -H "Authorization: Bearer ${access_token}" --request GET  -o ${gdrive_dir}tmp/spaceInfo "https://www.googleapis.com/drive/v2/about?fields=quotaBytesTotal,quotaBytesUsedAggregate" > /dev/null
 		if [ -f "${gdrive_dir}tmp/spaceInfo" ]; then
 			total_space=$(cat "${gdrive_dir}tmp/spaceInfo" | ${gdrive_dir}./JSON.sh -b | egrep '\["quotaBytesTotal"\]' | sed 's/\[.*\][^\"0-9tf]*//g' | sed 's/\"//g')
-			used_space=$(cat "${gdrive_dir}tmp/spaceInfo" | ${gdrive_dir}./JSON.sh -b | egrep '\["quotaBytesUsed"\]' | sed 's/\[.*\][^\"0-9tf]*//g' | sed 's/\"//g')
+			used_space=$(cat "${gdrive_dir}tmp/spaceInfo" | ${gdrive_dir}./JSON.sh -b | egrep '\["quotaBytesUsedAggregate"\]' | sed 's/\[.*\][^\"0-9tf]*//g' | sed 's/\"//g')
 			if [ "${total_space}" = "" ] || [ "${used_space}" = "" ]; then
 				response_code=$(cat "${gdrive_dir}tmp/spaceInfo" | ${gdrive_dir}./JSON.sh -b | egrep '\["error","code"\]' | sed 's/\[.*\][^\"0-9tf]*//g' | sed 's/\"//g')
 				if [ "${response_code}" = "401" ]; then
