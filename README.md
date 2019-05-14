@@ -172,12 +172,4 @@ Troubleshooting:
       ```
       reboot
       ```
-
-----
-
-## Donate to the xiaomi_gdrive project :hearts:
-
-<span class="badge-patreon"><a href="https://www.patreon.com/porunov" title="Donate to this project using Patreon"><img src="https://img.shields.io/badge/patreon-donate-blue.svg" alt="Patreon donate button" /></a></span>
-<span class="badge-bountysource"><a href="https://salt.bountysource.com/checkout/amount?team=porunov" title="Donate to this project using Bountysource"><img src="https://img.shields.io/badge/bountysource-donate-blue.svg" alt="Patreon donate button" /></a></span><br>
-Bitcoin address: 15PrkYhv9EZLiQbjQMJDRZsqdheE574XPe<br>
-Ethereum address: 0x65a92111d599aa0f6695b011c1c01390d4f29a2a<br>
+      
