@@ -205,7 +205,7 @@ remove_folder(){
 	        wait_until_proper_hours
 		${gdrive_dir}./curl --insecure -s --max-time 100 -H "Host: www.googleapis.com" -H "Authorization: Bearer ${access_token}" --request DELETE  -o ${gdrive_dir}tmp/removedFolder "https://www.googleapis.com/drive/v2/files/${1}" > /dev/null
 		if [ -f "${gdrive_dir}tmp/removedFolder" ]; then
-			response_code=$(cat "${gdrive_dir}tmp/folderListToRemove" | ${gdrive_dir}./JSON.sh -b | egrep '\["error","code"\]' | sed 's/\[.*\][^\"0-9tf]*//g' | sed 's/\"//g')
+			response_code=$(cat "${gdrive_dir}tmp/removedFolder" | ${gdrive_dir}./JSON.sh -b | egrep '\["error","code"\]' | sed 's/\[.*\][^\"0-9tf]*//g' | sed 's/\"//g')
 			if [ "${response_code}" = "401" ]; then
 				rm ${gdrive_dir}tmp/removedFolder
 				echo "WARNING: $(date) : Can not get folders. Token was expired. Trying to refresh token and get folders again"
