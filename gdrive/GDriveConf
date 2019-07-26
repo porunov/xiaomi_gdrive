@@ -149,7 +149,7 @@ configure(){
 	echo "Do you want to enable autoremove?"
 	echo "If you enable autoremove then when your google drive free space is less then 600 MB GDriveAutoremove script will try to remove old videos (it will remove only old videos from your folder to get about 1200 MB of free space)"
 	echo "WARNING: Do not put your personal data in the same folder where your videos are stored. GDrive autoremove script will delete all old data from that folder."
-	echo "If you want to enable autoremove feture type '1' and press Enter. If you do not want to enable autoremove feture then just type Enter. (Default: off): "
+	echo "If you want to enable autoremove feature type '1' and press Enter. If you do not want to enable autoremove feature then just type Enter. (Default: off): "
 
 	read autoremove
 
